@@ -1,50 +1,76 @@
-// Loop routines
+/**
+ * Exercises
+ * 
+ * Book finder
+ */
 
-// For
-for(let i = 10; i > 0; i--) {
+const booksByCategory = [
+  {
+    category: "Riqueza",
+    books: [
+      {
+        title: "Os segredos da mente milionária",
+        author: "T. Harv Eker",
+      },
+      {
+        title: "O homem mais rico da Babilônia",
+        author: "George S. Clason",
+      },
+      {
+        title: "Pai rico, pai pobre",
+        author: "Robert T. Kiyosaky e Sharon L. Lechter",
+      },
+    ],
+  },
+  {
+    category: "Inteligência Emocional",
+    books: [
+      {
+        title: "Você é Insubstituível",
+        author: "Augusto Cury",
+      },
+      {
+        title: "Ansiedade - Como enfrentar o mal so século",
+        author: "Augusto Cury",
+      },
+      {
+        title: "Os 7 hábitos das pessoas altamente eficazes",
+        author: "Stephen R. Covey",
+      },
+    ],
+  },
+]
 
-  if(i === 5) {
-    break;
+const totalCategorys = booksByCategory.length
+console.log(`We have ${totalCategorys} categorys.`)
+
+for(let category of booksByCategory) {
+  console.log(`We have ${category.books.length} books of ${category.category}!`)
+}
+
+let authors = {}
+
+for(let category of booksByCategory) {
+  for(let book of category.books) {
+    authors[book.author] = 1
+  }
+}
+const totalAuthors = Object.keys(authors).length
+console.log(`We have ${totalAuthors} authors.`)
+
+function booksOf(author) {
+  let books = []
+
+  for(let category of booksByCategory) {
+    for(let book of category.books) {
+      // Is the book of the searched author and it is not in the list yet
+      if(book.author === author && books.indexOf(book.title) === -1) {
+        books.push(book.title)
+      }
+    }
   }
 
-  if(i === 8) {
-    continue;
-  }
-
-  console.log(i)
+  console.log(`${author} books are "${books.join('", "')}"`)
 }
 
-// While
-let j = 54342453
-
-while(j > 10) {
-  console.log(j)
-
-  j /= 50
-}
-
-// For ... of
-let name = 'Tac'
-let names = ['João', 'Paulo', 'Pedro']
-
-// Walks for each character of name
-for(let char of name) {
-  console.log(char)
-}
-
-// Walks for each element of the array names
-for(let char of names) {
-  console.log(char)
-}
-
-// For in
-let person = {
-  name: 'John',
-  age: 30,
-  weigth: 88.6
-}
-
-for(let property in person){
-  console.log(`Property: ${property} - Value: ${person[property]}`)
-}
-
+booksOf('Augusto Cury')
